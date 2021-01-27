@@ -97,3 +97,15 @@ h2 {
 	 color:lightgray;
 	 letter-spacing: 5px;
  }
+
+/**************************************************
+ * TRANSACTIONS
+ **************************************************/
+
+.posAmount {
+	color: rgb(0, 202, 0);
+}
+
+.negAmount {
+	color: red;
+}

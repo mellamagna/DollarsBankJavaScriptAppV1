@@ -26,6 +26,9 @@ const Navbar = props => {
 						<Link className="nav-link" to="/transfer">Transfer</Link>
 					</li>
 					<li className="nav-item">
+						<Link className="nav-link" to="/transactions">Transactions</Link>
+					</li>
+					<li className="nav-item">
 						<Link className="nav-link" to="/logout">Log out</Link>
 					</li>
 				</Fragment>

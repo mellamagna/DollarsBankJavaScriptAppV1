@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Redirect } from 'react-router-dom';
 
 const CreateAccount = props => {
@@ -15,6 +15,9 @@ const CreateAccount = props => {
 		"savingsbalance": 0
 	});
 	const [redirect, setRedirect] = useState();
+	const [transConf1, setTransConf1] = useState(false);
+	const [transConf2, setTransConf2] = useState(false);
+	const [runOnce, setRunOnce] = useState(true);
 	const [showPasswordAlert, setShowPasswordAlert] = useState(false);
 	const [showUsernameAlert, setShowUsernameAlert] = useState(false);
 
@@ -36,10 +39,46 @@ const CreateAccount = props => {
 				setShowUsernameAlert(true);
 			}
 		} else {
+			var trans1 = {
+				id: -1,
+				date: new Date().toISOString().slice(0, 10),
+				user: formData.username,
+				desc: "Initial deposit to checking",
+				amount: formData.checkingbalance
+			};
+			if (formData.checkingbalance > 0) {
+				setTransConf1(props.addTransaction(trans1));
+			} else {
+				setTransConf1(true);
+			}
 			props.addAccount(formData);
-			setRedirect("/");
+			props.setSession(formData);
 		}
 	}
+
+	useEffect(() => {
+		if (props.session !== null && transConf1 && runOnce) {
+			setRunOnce(false);
+			var trans2 = {
+				id: -1,
+				date: new Date().toISOString().slice(0, 10),
+				user: formData.username,
+				desc: "Initial deposit to savings",
+				amount: formData.savingsbalance
+			};
+			if (formData.savingsbalance > 0) {
+				setTransConf2(props.addTransaction(trans2));
+			} else {
+				setTransConf2(true);
+			}
+		}
+	},[props, formData, transConf1, runOnce]);
+
+	useEffect(() => {
+		if (props.session !== null && transConf1 && transConf2) {
+			setRedirect("/");
+		}
+	},[props, transConf1, transConf2]);
 
 	const PasswordAlert = () => {
 		return (
@@ -55,7 +94,7 @@ const CreateAccount = props => {
 
 	if (redirect) {
 		return (
-			<Redirect to="/"/>
+			<Redirect to={ redirect }/>
 		);
 	} else {
 		return (

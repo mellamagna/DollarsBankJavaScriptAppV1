@@ -8,6 +8,7 @@ const Transfer = props => {
 		"account-type": "checking",
 		"amount": 0,
 	});
+	const [transConf, setTransConf] = useState(false);
 	const [redirect, setRedirect] = useState();
 
 	const handleChange = (event) => {
@@ -22,19 +23,29 @@ const Transfer = props => {
 		event.preventDefault();
 		var currentChecking = sessionData.checkingbalance;
 		var currentSavings = sessionData.savingsbalance;
+		var trans = {
+			id: -1,
+			date: new Date().toISOString().slice(0, 10),
+			user: sessionData.username,
+			desc: "",
+			amount: parseInt(formData.amount) * -1
+		};
 		if (formData['account-type'] === "savings") {
+			trans.desc = "Transfer from savings";
 			updateSessionData({
 				...sessionData,
 				savingsbalance: (currentSavings - parseInt(formData.amount)),
 				checkingbalance: (currentChecking + parseInt(formData.amount))
 			});
 		} else {
+			trans.desc = "Transfer from checking";
 			updateSessionData({
 				...sessionData,
 				checkingbalance: (currentChecking - parseInt(formData.amount)),
 				savingsbalance: (currentSavings + parseInt(formData.amount))
 			});
 		}
+		setTransConf(props.addTransaction(trans));
 	}
 
 	useEffect(() => {
@@ -42,11 +53,13 @@ const Transfer = props => {
 			setRedirect("/");
 		} else if (sessionData.checkingbalance !== props.session.checkingbalance
 				|| sessionData.savingsbalance !== props.session.savingsbalance) {
-			props.updateAccount(sessionData);
-			props.setSession(sessionData);
-			setRedirect("/");
+			if (transConf) {
+				props.updateAccount(sessionData);
+				props.setSession(sessionData);
+				setRedirect("/");
+			}
 		}
-	},[props, sessionData, formData]);
+	},[props, sessionData, formData, transConf]);
 
 	if (redirect) {
 		return(

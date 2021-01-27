@@ -8,6 +8,7 @@ const Deposit = props => {
 		"account-type": "checking",
 		"amount": 0,
 	});
+	const [transConf, setTransConf] = useState(false);
 	const [redirect, setRedirect] = useState();
 
 	const handleChange = (event) => {
@@ -22,17 +23,27 @@ const Deposit = props => {
 		event.preventDefault();
 		var currentChecking = sessionData.checkingbalance;
 		var currentSavings = sessionData.savingsbalance;
+		var trans = {
+			id: -1,
+			date: new Date().toISOString().slice(0, 10),
+			user: sessionData.username,
+			desc: "",
+			amount: formData.amount
+		};
 		if (formData['account-type'] === "savings") {
+			trans.desc = "Deposit to savings";
 			updateSessionData({
 				...sessionData,
 				savingsbalance: (currentSavings + parseInt(formData.amount))
 			});
 		} else {
+			trans.desc = "Deposit to checking";
 			updateSessionData({
 				...sessionData,
 				checkingbalance: (currentChecking + parseInt(formData.amount))
 			});
 		}
+		setTransConf(props.addTransaction(trans));
 	}
 
 	useEffect(() => {
@@ -40,11 +51,13 @@ const Deposit = props => {
 			setRedirect("/");
 		} else if (sessionData.checkingbalance !== props.session.checkingbalance
 				|| sessionData.savingsbalance !== props.session.savingsbalance) {
-			props.updateAccount(sessionData);
-			props.setSession(sessionData);
-			setRedirect("/");
+			if (transConf) {
+				props.updateAccount(sessionData);
+				props.setSession(sessionData);
+				setRedirect("/");
+			}
 		}
-	},[props, sessionData]);
+	},[props, sessionData, transConf]);
 
 	if (redirect) {
 		return(
