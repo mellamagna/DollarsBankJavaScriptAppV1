@@ -20,6 +20,9 @@ const Navbar = props => {
 						<Link className="nav-link" to="/deposit">Deposit</Link>
 					</li>
 					<li className="nav-item">
+						<Link className="nav-link" to="/withdraw">Withdraw</Link>
+					</li>
+					<li className="nav-item">
 						<Link className="nav-link" to="/logout">Log out</Link>
 					</li>
 				</Fragment>
