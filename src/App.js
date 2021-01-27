@@ -10,10 +10,11 @@ import Login from './components/Login';
 import CreateAccount from './components/CreateAccount';
 import Navbar from './components/Navbar';
 import Home from './components/Home';
+import Logout from './components/Logout';
 
 function App() {
 
-  const[session, setSession] = useState();
+  const[session, setSession] = useState(null);
 	const[accounts, setAccounts] = useState([]);
 	const[transactions, setTransactions] = useState([]);
 
@@ -36,25 +37,35 @@ function App() {
 		setTransactions([...transactions,
 			trans
 		])
-	}
+  }
+  
+  const HomePage = () => {
+    if (session === null) {
+      return <Login getAccount={ getAccount } setSession={ setSession }/>;
+    } else {
+      return <Home session={ session }/>;
+    }
+  }
 
 	return (
 		<div className="App">
 			<Router>
 
-				<Navbar />
+				<Navbar session={ session }/>
 
-				<Switch>
-					<Route path="/createaccount">
-						<CreateAccount addAccount={ addAccount } addTransaction={ addTransaction } getAccount={ getAccount }/>
-					</Route>
-          <Route path="/home">
-						<Home session={ session }/>
-					</Route>
-					<Route path="/">
-						<Login getAccount={ getAccount } setSession={ setSession }/>
-					</Route>
-				</Switch>
+        <main>
+          <Switch>
+            <Route path="/logout">
+              <Logout setSession={ setSession }/>
+            </Route>
+            <Route path="/createaccount">
+              <CreateAccount addAccount={ addAccount } addTransaction={ addTransaction } getAccount={ getAccount }/>
+            </Route>
+            <Route path="/">
+              <HomePage />
+            </Route>
+          </Switch>
+        </main>
 
 			</Router>
 		</div>

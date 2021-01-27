@@ -2,16 +2,12 @@
  * GENERAL
  **************************************************/
 
-.DollarsBankLogo {
-	text-decoration: none;
-	font-weight: bold;
-	color:greenyellow;
-	font-family: "Lucida Console", "Courier New", monospace;
-	font-size: x-large;
+a {
+	color:rgb(128, 189, 36);
 }
 
-.DollarsBankLogo:hover {
-	color:greenyellow;
+a:hover {
+	color:green;
 }
 
 .form-alert {
@@ -26,16 +22,34 @@ h2 {
 	margin-top: 20px;
 }
 
-
-
 /**************************************************
  * NAVBAR
  **************************************************/
 
+.DollarsBankLogo {
+	text-decoration: none;
+	font-weight: bold;
+	color:greenyellow;
+	font-family: "Lucida Console", "Courier New", monospace;
+	font-size: x-large;
+	padding-top: 0;
+	padding-bottom: 0;
+	height: 50px;
+	line-height: 50px;
+}
+
+.DollarsBankLogo:hover {
+	color:greenyellow;
+}
+
 #navbar {
 	background-color: #1f1f1f;
 	color: white;
-	padding: 10px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	/* position: fixed; */
+	top: 0;
+	z-index: 999;
  }
 
 .nav-link {
@@ -45,3 +59,41 @@ h2 {
 	height: 50px;
 	line-height: 50px;
 }
+
+.nav-link:hover {
+	color:greenyellow;
+}
+
+.vl {
+	margin-left: 20px;
+	margin-right: 20px;
+	border-left: 2px solid gray;
+	/* height: 50px; */
+}
+
+#navbarmessage {
+	font-style: italic;
+	padding-top: 0;
+	padding-bottom: 0;
+	height: 50px;
+	line-height: 50px;
+}
+
+/**************************************************
+ * NAVBAR
+ **************************************************/
+
+.balance {
+	font-size:100px;
+	color:green;
+}
+
+.balance-display {
+	padding: 20px;
+	text-align: center;
+ }
+
+ .balance-label {
+	 color:lightgray;
+	 letter-spacing: 5px;
+ }

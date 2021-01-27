@@ -24,7 +24,7 @@ const Login = props => {
 		if (passCheck !== null) {
 			if (passCheck.password === formData.password) {
 				props.setSession(passCheck);
-				setRedirect("/home");
+				setRedirect("/");
 			} else {
 				setShowLoginAlert(true);
 			}
@@ -46,7 +46,7 @@ const Login = props => {
 	} else {
 		return (
 			<div className="container">
-				<h2>Login</h2>
+				<h1>Login</h1>
 				<form onSubmit={ handleSubmit }>
 					<div className="mb-3">
 						{ showLoginAlert ? <LoginAlert /> : null }
@@ -62,7 +62,7 @@ const Login = props => {
 					<div className="mb-3">
 						<Link to="/createaccount">Create an account</Link>
 					</div>
-					<button type="submit" className="btn btn-primary">Submit</button>
+					<button type="submit" className="btn btn-success">Submit</button>
 				</form>
 			</div>
 		);

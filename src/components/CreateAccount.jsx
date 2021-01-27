@@ -7,6 +7,7 @@ const CreateAccount = props => {
 		"firstname": "",
 		"lastname": "",
 		"address": "",
+		"phone": "",
 		"username": "",
 		"password": "",
 		"confirmpassword": "",
@@ -59,7 +60,7 @@ const CreateAccount = props => {
 	} else {
 		return (
 			<div className="container">
-				<h2>Create account</h2>
+				<h1>Create account</h1>
 				<form onSubmit={ handleSubmit }>
 					<div className="mb-3">
 						<label htmlFor="inputFirstName" className="form-label">First name</label>
@@ -74,6 +75,11 @@ const CreateAccount = props => {
 					<div className="mb-3">
 						<label htmlFor="inputAddress" className="form-label">Address</label>
 						<input type="text" className="form-control" id="inputAddress" name="address" 
+							required onChange={ handleChange }/>
+					</div>
+					<div className="mb-3">
+						<label htmlFor="inputPhone" className="form-label">Phone</label>
+						<input type="tel" className="form-control" id="inputPhone" name="phone" 
 							required onChange={ handleChange }/>
 					</div>
 					<div className="mb-3">
@@ -103,7 +109,7 @@ const CreateAccount = props => {
 						<input type="number" className="form-control" id="inputInitialDepositSavings"  min="0" max="1000000000" name="savingsbalance" 
 							required onChange={ handleChange }/>
 					</div>
-					<button type="submit" className="btn btn-primary">Submit</button>
+					<button type="submit" className="btn btn-success">Submit</button>
 				</form>
 			</div>
 		);
