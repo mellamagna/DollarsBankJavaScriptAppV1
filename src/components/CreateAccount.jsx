@@ -22,7 +22,7 @@ const CreateAccount = props => {
 		var result = event.target.value.trim();
 		updateFormData({
 			...formData,
-			[event.target.name]: result
+			[event.target.name]: (event.target.name === "checkingbalance" || event.target.name === "savingsbalance" ? parseInt(result) : result)
 		});
 	}
 
@@ -99,15 +99,19 @@ const CreateAccount = props => {
 							required onChange={ handleChange }/>
 						{ showPasswordAlert ? <PasswordAlert /> : null }
 					</div>
-					<div className="mb-3">
-						<label htmlFor="inputInitialDepositChecking" className="form-label">Initial deposit (checking)</label>
+					<label htmlFor="inputInitialDepositChecking" className="form-label">Initial deposit (checking)</label>
+					<div className="input-group mb-3">
+						<span className="input-group-text">$</span>
 						<input type="number" className="form-control" id="inputInitialDepositChecking" min="0" max="1000000000" name="checkingbalance" 
 							required onChange={ handleChange }/>
+						<span className="input-group-text">.00</span>
 					</div>
-					<div className="mb-3">
-						<label htmlFor="inputInitialDepositSavings" className="form-label">Initial deposit (savings)</label>
+					<label htmlFor="inputInitialDepositSavings" className="form-label">Initial deposit (savings)</label>
+					<div className="input-group mb-3">
+						<span className="input-group-text">$</span>
 						<input type="number" className="form-control" id="inputInitialDepositSavings"  min="0" max="1000000000" name="savingsbalance" 
 							required onChange={ handleChange }/>
+						<span className="input-group-text">.00</span>
 					</div>
 					<button type="submit" className="btn btn-success">Submit</button>
 				</form>

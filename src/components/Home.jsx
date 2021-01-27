@@ -18,7 +18,7 @@ const Home = props => {
 			</div>
 			<h2>Customer information</h2>
 			<div className="container">
-				<table class="table">
+				<table className="table">
 					<tbody>
 						<tr>
 							<th scope="row">Account holder</th>

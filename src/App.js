@@ -11,6 +11,7 @@ import CreateAccount from './components/CreateAccount';
 import Navbar from './components/Navbar';
 import Home from './components/Home';
 import Logout from './components/Logout';
+import Deposit from './components/Deposit';
 
 function App() {
 
@@ -31,6 +32,13 @@ function App() {
     } else {
       return null;
     }
+  }
+
+  const updateAccount = acct => {
+    setAccounts(accounts.map(
+        x => x.username === acct.username ? acct : x
+      )
+    )
   }
 
 	const addTransaction = trans => {
@@ -55,6 +63,9 @@ function App() {
 
         <main>
           <Switch>
+            <Route path="/deposit">
+              <Deposit session={ session } setSession={setSession} updateAccount={ updateAccount }/>
+            </Route>
             <Route path="/logout">
               <Logout setSession={ setSession }/>
             </Route>
