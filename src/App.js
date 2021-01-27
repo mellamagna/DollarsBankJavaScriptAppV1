@@ -13,6 +13,7 @@ import Home from './components/Home';
 import Logout from './components/Logout';
 import Deposit from './components/Deposit';
 import Withdraw from './components/Withdraw';
+import Transfer from './components/Transfer';
 
 function App() {
 
@@ -69,6 +70,9 @@ function App() {
             </Route>
             <Route path="/withdraw">
               <Withdraw session={ session } setSession={setSession} updateAccount={ updateAccount }/>
+            </Route>
+            <Route path="/transfer">
+              <Transfer session={ session } setSession={setSession} updateAccount={ updateAccount }/>
             </Route>
             <Route path="/logout">
               <Logout setSession={ setSession }/>

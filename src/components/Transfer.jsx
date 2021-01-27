@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Redirect } from 'react-router-dom';
 
-const Withdraw = props => {
+const Transfer = props => {
 
 	const [sessionData, updateSessionData] = useState(props.session);
 	const [formData, updateFormData] = useState({
@@ -25,12 +25,14 @@ const Withdraw = props => {
 		if (formData['account-type'] === "savings") {
 			updateSessionData({
 				...sessionData,
-				savingsbalance: (currentSavings - parseInt(formData.amount))
+				savingsbalance: (currentSavings - parseInt(formData.amount)),
+				checkingbalance: (currentChecking + parseInt(formData.amount))
 			});
 		} else {
 			updateSessionData({
 				...sessionData,
-				checkingbalance: (currentChecking - parseInt(formData.amount))
+				checkingbalance: (currentChecking - parseInt(formData.amount)),
+				savingsbalance: (currentSavings + parseInt(formData.amount))
 			});
 		}
 	}
@@ -53,7 +55,7 @@ const Withdraw = props => {
 	} else {
 		return (
 			<div className="container">
-				<h1>Withdraw</h1>
+				<h1>Transfer</h1>
 				<form onSubmit={ handleSubmit }>
 					<div className="mb-3">
 						<label htmlFor="inputAccountType" className="form-label">Source account</label>
@@ -79,4 +81,4 @@ const Withdraw = props => {
 
 };
 
-export default Withdraw;
+export default Transfer;
