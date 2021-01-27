@@ -31,14 +31,14 @@ const Transfer = props => {
 			amount: parseInt(formData.amount) * -1
 		};
 		if (formData['account-type'] === "savings") {
-			trans.desc = "Transfer from savings";
+			trans.desc = "Transfer from savings to checking";
 			updateSessionData({
 				...sessionData,
 				savingsbalance: (currentSavings - parseInt(formData.amount)),
 				checkingbalance: (currentChecking + parseInt(formData.amount))
 			});
 		} else {
-			trans.desc = "Transfer from checking";
+			trans.desc = "Transfer from checking to savings";
 			updateSessionData({
 				...sessionData,
 				checkingbalance: (currentChecking - parseInt(formData.amount)),
@@ -71,10 +71,10 @@ const Transfer = props => {
 				<h1>Transfer</h1>
 				<form onSubmit={ handleSubmit }>
 					<div className="mb-3">
-						<label htmlFor="inputAccountType" className="form-label">Source account</label>
+						<label htmlFor="inputAccountType" className="form-label">Source/destination accounts</label>
 						<select className="form-select form-select-lg mb-3" id="inputAccountType" name="account-type" defaultValue="checking" onChange={ handleChange }>
-							<option value="checking">Checking</option>
-							<option value="savings">Savings</option>
+							<option value="checking">Checking to savings</option>
+							<option value="savings">Savings to checking</option>
 						</select>
 					</div>
 					<label htmlFor="inputAmount" className="form-label">Amount</label>
