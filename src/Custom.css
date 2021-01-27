@@ -1,0 +1,47 @@
+/**************************************************
+ * GENERAL
+ **************************************************/
+
+.DollarsBankLogo {
+	text-decoration: none;
+	font-weight: bold;
+	color:greenyellow;
+	font-family: "Lucida Console", "Courier New", monospace;
+	font-size: x-large;
+}
+
+.DollarsBankLogo:hover {
+	color:greenyellow;
+}
+
+.form-alert {
+	color: red;
+}
+
+h1 {
+	margin-top: 20px;
+}
+
+h2 {
+	margin-top: 20px;
+}
+
+
+
+/**************************************************
+ * NAVBAR
+ **************************************************/
+
+#navbar {
+	background-color: #1f1f1f;
+	color: white;
+	padding: 10px;
+ }
+
+.nav-link {
+	color: white;
+	padding-top: 0;
+	padding-bottom: 0;
+	height: 50px;
+	line-height: 50px;
+}
